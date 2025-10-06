@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/home"
+        app:showAsAction="ifRoom"
+        android:title="Home"
+        />
+
+
+    <item
+        android:id="@+id/dash"
+        app:showAsAction="ifRoom"
+        android:title="Dashboard"
+        android:icon="@drawable/dash"
+        />
+    <item
+        android:id="@+id/add"
+        android:icon="@drawable/add"
+        app:showAsAction="ifRoom"
+        android:title="add"
+        />
+
+    <item
+        android:icon="@drawable/update"
+        android:id="@+id/up"
+        app:showAsAction="ifRoom"
+        android:title="Update"
+        />
+    <item
+        android:icon="@drawable/log"
+        android:id="@+id/logIn"
+        app:showAsAction="ifRoom"
+        android:title="login"
+        />
+
+
+
+</menu>
