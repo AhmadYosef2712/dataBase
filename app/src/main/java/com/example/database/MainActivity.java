@@ -5,7 +5,11 @@ import static com.example.database.R.id.logIn;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -17,7 +21,12 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class MainActivity extends AppCompatActivity  implements AdapterView.OnItemClickListener {
+    private ListView lv;
+    private ArrayList<String> myList;
+    private ArrayAdapter<String> adapter;
     public static FrameLayout frLog,frAdd,frUp,frDash;
     private BottomNavigationView nav1;
     private update update;
@@ -39,7 +48,23 @@ public class MainActivity extends AppCompatActivity {
         frDash = findViewById(R.id.dash);
 
 
-       update=new update();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        update=new update();
         login=new Login();
         add=new add();
         dash=new dash();
@@ -104,4 +129,22 @@ public class MainActivity extends AppCompatActivity {
     public void exit(View view) {
        System.exit(0);
     }
+
+
+    public void add(View view) {
+        frLog.setVisibility(View.INVISIBLE);
+        frUp.setVisibility(View.INVISIBLE);
+        frAdd.setVisibility(View.VISIBLE);
+        frDash.setVisibility(View.INVISIBLE);
+    }
+
+
+
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+    }
+
+
 }

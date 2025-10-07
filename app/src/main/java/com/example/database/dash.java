@@ -1,64 +1,92 @@
 package com.example.database;
 
+import static java.nio.file.Files.move;
+
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.ListView;
+import android.widget.Toast;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link dash#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class dash extends Fragment {
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+import java.util.ArrayList;
+import java.util.Objects;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public dash() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment dash.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static dash newInstance(String param1, String param2) {
-        dash fragment = new dash();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+public class dash extends Fragment implements  {
+    public static FrameLayout frUp;
+    private update update;
+    private int a=0;
+    public static int id=0;
+    private ArrayList<ModelClient> clients = new ArrayList<>();
+    private ModelClient c;
+    private String x="";
+    private View view;
+    private ArrayList<String> clientList = new ArrayList<>();
+    private ArrayAdapter<String> adapter;
+    private ListView listView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.dash, container, false);
+        view = inflater.inflate(R.layout.dash, container, false);
+        frUp = view.findViewById(R.id.up);
+        update=new update();
+
+
+        listView = view.findViewById(R.id.lv);
+        adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_single_choice, clientList);
+        listView.setAdapter(adapter);
+
+        listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        //clientList.set(a, "Client Name\nAmount");
+
+
+        // Receive new clients from Add fragment
+        getParentFragmentManager().setFragmentResultListener("name", this, (requestKey, result) -> {
+            String name = result.getString("name");
+            if (name != null && !name.trim().isEmpty()) {
+                x=name;
+                adapter.notifyDataSetChanged();
+            }
+        });
+        getParentFragmentManager().setFragmentResultListener("amount", this, (requestKey, result) -> {
+           int amount = result.getInt("amount");
+            if (amount >=0) {
+                clientList.add(x+"\n"+amount);
+                c=new ModelClient(x,amount,id);
+                clients.add(c);
+                id++;
+                adapter.notifyDataSetChanged();
+            }
+        });
+
+
+
+
+        return view;
+    }
+
+
+
+
+
+
+    private void deleteSelectedClient() {
+        int position = listView.getCheckedItemPosition();
+        if (position != ListView.INVALID_POSITION) {
+            String removedName = clientList.remove(position);
+            adapter.notifyDataSetChanged();
+            listView.clearChoices(); // Clear selection
+            Toast.makeText(requireContext(), removedName + " deleted", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(requireContext(), "No client selected", Toast.LENGTH_SHORT).show();
+        }
     }
 }
