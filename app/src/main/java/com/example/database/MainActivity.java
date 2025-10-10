@@ -3,6 +3,7 @@ package com.example.database;
 import static com.example.database.R.id.logIn;
 
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -10,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -33,6 +35,8 @@ public class MainActivity extends AppCompatActivity  implements AdapterView.OnIt
     private Login login;
     private add add;
     private dash dash;
+    public static boolean logedin=false;
+
 
 
 
@@ -73,7 +77,7 @@ public class MainActivity extends AppCompatActivity  implements AdapterView.OnIt
         getSupportFragmentManager().beginTransaction().replace(R.id.add,add).commit();
         getSupportFragmentManager().beginTransaction().replace(R.id.up,update).commit();
         getSupportFragmentManager().beginTransaction().replace(R.id.dash,dash).commit();
-        frLog.setVisibility(View.INVISIBLE);
+        frLog.setVisibility(View.VISIBLE);
         frUp.setVisibility(View.INVISIBLE);
         frAdd.setVisibility(View.INVISIBLE);
         frDash.setVisibility(View.INVISIBLE);
@@ -81,39 +85,50 @@ public class MainActivity extends AppCompatActivity  implements AdapterView.OnIt
         nav1.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if (item.getItemId() == R.id.home) {
-                    frLog.setVisibility(View.INVISIBLE);
-                    frUp.setVisibility(View.INVISIBLE);
-                    frAdd.setVisibility(View.INVISIBLE);
-                    frDash.setVisibility(View.INVISIBLE);
 
-                }
                 if (item.getItemId() == R.id.logIn) {
+                    if(logedin){
                     frLog.setVisibility(View.VISIBLE);
                     frUp.setVisibility(View.INVISIBLE);
                     frAdd.setVisibility(View.INVISIBLE);
-                    frDash.setVisibility(View.INVISIBLE);
+                    frDash.setVisibility(View.INVISIBLE);}
+                    else{
+                        Toast.makeText(MainActivity.this, "Log In First", Toast.LENGTH_SHORT).show();
+                    }
 
                 }
                 if (item.getItemId() == R.id.up) {
+                    if(logedin){
                     frLog.setVisibility(View.INVISIBLE);
                     frUp.setVisibility(View.VISIBLE);
                     frAdd.setVisibility(View.INVISIBLE);
-                    frDash.setVisibility(View.INVISIBLE);
+                    frDash.setVisibility(View.INVISIBLE);}
+                    else{
+                        Toast.makeText(MainActivity.this, "Log In First", Toast.LENGTH_SHORT).show();
+                    }
 
                 }
                 if (item.getItemId() == R.id.add) {
+                    if(logedin){
                     frLog.setVisibility(View.INVISIBLE);
                     frUp.setVisibility(View.INVISIBLE);
                     frAdd.setVisibility(View.VISIBLE);
-                    frDash.setVisibility(View.INVISIBLE);
+                    frDash.setVisibility(View.INVISIBLE);}
+                    else{
+                        Toast.makeText(MainActivity.this, "Log In First", Toast.LENGTH_SHORT).show();
+                    }
 
                 }
                 if (item.getItemId() == R.id.dash) {
+                    if(logedin){
                     frLog.setVisibility(View.INVISIBLE);
                     frUp.setVisibility(View.INVISIBLE);
                     frAdd.setVisibility(View.INVISIBLE);
-                    frDash.setVisibility(View.VISIBLE);
+                    frDash.setVisibility(View.VISIBLE);}
+                    else{
+                        Toast.makeText(MainActivity.this, "Log In First", Toast.LENGTH_SHORT).show();
+                    }
+
 
                 }
 
@@ -124,6 +139,7 @@ public class MainActivity extends AppCompatActivity  implements AdapterView.OnIt
 
 
     }
+
 
 
     public void exit(View view) {
@@ -144,6 +160,12 @@ public class MainActivity extends AppCompatActivity  implements AdapterView.OnIt
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
+    }
+    public static void move(){
+        frLog.setVisibility(View.INVISIBLE);
+        frUp.setVisibility(View.VISIBLE);
+        frAdd.setVisibility(View.INVISIBLE);
+        frDash.setVisibility(View.INVISIBLE);
     }
 
 

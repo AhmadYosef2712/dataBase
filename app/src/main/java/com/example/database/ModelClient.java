@@ -1,5 +1,7 @@
-public class ModelClient
-{
+package com.example.database;
+
+public class ModelClient {
+
     private String Name;
     private int amount;
     private long id;
@@ -24,19 +26,26 @@ public class ModelClient
         this.id = id;
     }
 
-    public void setamount(int s)
+    public void setAmount(int s)
     {
         this.amount = s;
+    }
+    public void setName(String n)
+    {
+        this.Name = n;
     }
     public String getName() {
         return Name;
     }
 
-    public int getamount() {
+    public int getAmount() {
         return amount;
 
     }
 
+    public  String toString(){
+        return this.getName()+"("+this.getAmount()+")";
+    }
 
 
 

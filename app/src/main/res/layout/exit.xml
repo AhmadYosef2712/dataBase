@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="400dp"
+    android:layout_height="120dp"
+    android:orientation="vertical"
+    android:layout_marginTop="50dp"
+    >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Really , do you want to exit ? "
+        android:textSize="25sp"
+        android:layout_marginTop="20dp"/>
+    <Button
+        android:layout_marginLeft="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="exit"
+        android:layout_marginTop="20dp"
+        android:onClick="exit"/>
+</LinearLayout>
+
+

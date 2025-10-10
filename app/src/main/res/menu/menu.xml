@@ -2,11 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/home"
         android:icon="@drawable/home"
+        android:id="@+id/logIn"
         app:showAsAction="ifRoom"
         android:title="Home"
         />
+
 
 
     <item
@@ -28,12 +29,7 @@
         app:showAsAction="ifRoom"
         android:title="Update"
         />
-    <item
-        android:icon="@drawable/log"
-        android:id="@+id/logIn"
-        app:showAsAction="ifRoom"
-        android:title="login"
-        />
+
 
 
 
